@@ -818,6 +818,17 @@ h3 {
   font-weight: 900;
 }
 
+.friend-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.friend-links span {
+  font-weight: 800;
+}
+
 @media (max-width: 860px) {
   .site-header,
   .site-footer {
