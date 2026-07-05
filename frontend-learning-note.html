@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>前端学习笔记：从页面结构到交互 | Gigoton's Blog</title>
+    <meta name="description" content="Gigoton's Blog 的前端学习笔记，整理 HTML、CSS、JavaScript 和项目练习方法。">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="回到个人介绍页">
+        <span class="brand-mark">G</span>
+        <span>Gigoton's Blog</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="index.html">个人介绍</a>
+        <a class="active" href="notes.html">笔记集合</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article-page">
+        <header class="article-hero">
+          <a class="back-link" href="notes.html">返回笔记集合</a>
+          <p class="eyebrow">Frontend Notes</p>
+          <h1>前端学习笔记：从页面结构到交互</h1>
+          <p class="article-summary">
+            前端不是只把页面“画出来”，而是把内容结构、视觉层级、交互反馈和浏览器行为组织成一个可用的体验。
+          </p>
+          <div class="article-meta">
+            <span>分类：技术 / 前端</span>
+            <time datetime="2026-07-05">2026.07.05</time>
+          </div>
+        </header>
+
+        <div class="article-body">
+          <section>
+            <h2>1. HTML 先负责语义</h2>
+            <p>
+              写页面时先不要急着想颜色和动画，先把内容关系写清楚。标题用 heading，导航用 nav，主要内容放进 main，
+              一组独立内容可以用 article 或 section。语义清楚以后，样式和交互才有稳定的挂载点。
+            </p>
+            <p>
+              一个好习惯是：只看 HTML 时也能大概读懂页面在讲什么。这样不仅方便自己维护，也对搜索引擎和辅助技术更友好。
+            </p>
+          </section>
+
+          <section>
+            <h2>2. CSS 管布局，也管节奏</h2>
+            <p>
+              CSS 不只是“美化”，它决定了信息如何被扫描。学习时可以重点掌握盒模型、Flex、Grid、响应式断点和状态样式。
+              做个人博客这类页面时，Grid 很适合管理整体版面，Flex 更适合处理按钮、导航、标签这类一维排列。
+            </p>
+            <ul class="article-list">
+              <li>先定义全局颜色、字体、间距变量，避免每个组件单独猜数值。</li>
+              <li>给卡片、按钮、输入框保留稳定尺寸，减少 hover 或内容变化造成的跳动。</li>
+              <li>移动端优先检查导航、标题换行、卡片宽度和输入框是否舒服。</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>3. JavaScript 负责行为，不要抢结构的工作</h2>
+            <p>
+              初学 JavaScript 时，最实用的练习是做“小而完整”的交互：搜索、筛选、展开收起、主题切换、表单校验。
+              这些功能不复杂，但能练到 DOM 查询、事件监听、状态更新和边界情况处理。
+            </p>
+            <p>
+              例如这个博客的笔记集合页，搜索框和标签按钮就是一个小练习：先保存当前筛选条件，再根据关键词和标签决定每张卡片是否显示。
+            </p>
+          </section>
+
+          <section>
+            <h2>4. 学习路线</h2>
+            <ol class="article-list">
+              <li>用 HTML 写出清晰页面骨架，包括标题、段落、链接、列表和表单。</li>
+              <li>用 CSS 完成一个响应式页面，重点练 Flex、Grid 和媒体查询。</li>
+              <li>用 JavaScript 给页面加一个真实交互，例如搜索笔记或切换标签。</li>
+              <li>把页面部署出去，再根据手机和电脑上的真实效果修改细节。</li>
+            </ol>
+          </section>
+
+          <section>
+            <h2>5. 这周的小任务</h2>
+            <p>
+              给自己的博客继续补三件事：把“阅读全文”都接到真实文章页；给笔记加更细的标签；为每篇文章保留创建日期和修改日期。
+              这些都不大，但会让站点从“页面”慢慢变成“系统”。
+            </p>
+          </section>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Gigoton's Blog</span>
+      <a href="notes.html">回到笔记集合</a>
+    </footer>
+  </body>
+</html>
