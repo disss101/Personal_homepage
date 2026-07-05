@@ -197,6 +197,13 @@ a {
   font-weight: 900;
 }
 
+.auth-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+}
+
 .secondary-provider {
   color: var(--forest);
   background: var(--surface);
@@ -803,6 +810,10 @@ h3 {
   .engagement-head {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .auth-actions {
+    grid-template-columns: 1fr;
   }
 }
 

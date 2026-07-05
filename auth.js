@@ -8,6 +8,7 @@
   let currentUser = null;
   let modal;
   let emailInput;
+  let passwordInput;
   let authMessage;
   let authButton;
   let userBadge;
@@ -76,14 +77,20 @@
         <button class="auth-close" type="button" aria-label="关闭登录窗口" data-close-auth>×</button>
         <p class="eyebrow">Account</p>
         <h2 id="authTitle">登录 Gigoton's Blog</h2>
-        <p class="auth-hint">登录后可以给文章点赞和留言。</p>
-        <button class="auth-provider" type="button" data-github-login>使用 GitHub 登录</button>
+        <p class="auth-hint">邮箱就是用户名，登录后可以给文章点赞和留言。</p>
         <form class="email-login-form">
           <label>
-            <span>邮箱登录</span>
+            <span>邮箱</span>
             <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
           </label>
-          <button class="auth-provider secondary-provider" type="submit">发送登录邮件</button>
+          <label>
+            <span>密码</span>
+            <input type="password" name="password" placeholder="至少 6 位" autocomplete="current-password" minlength="6" required>
+          </label>
+          <div class="auth-actions">
+            <button class="auth-provider" type="submit" data-auth-action="login">登录</button>
+            <button class="auth-provider secondary-provider" type="button" data-auth-action="signup">注册</button>
+          </div>
         </form>
         <p class="auth-message" data-type="info"></p>
       </section>
@@ -91,22 +98,11 @@
     document.body.appendChild(modal);
 
     emailInput = modal.querySelector("input[type='email']");
+    passwordInput = modal.querySelector("input[type='password']");
     authMessage = modal.querySelector(".auth-message");
 
     modal.querySelectorAll("[data-close-auth]").forEach((node) => {
       node.addEventListener("click", closeModal);
-    });
-
-    modal.querySelector("[data-github-login]").addEventListener("click", async () => {
-      if (!client) {
-        setMessage("还没配置 Supabase，先填 supabase-config.js。", "error");
-        return;
-      }
-      const { error } = await client.auth.signInWithOAuth({
-        provider: "github",
-        options: { redirectTo: window.location.href }
-      });
-      if (error) setMessage(error.message, "error");
     });
 
     modal.querySelector(".email-login-form").addEventListener("submit", async (event) => {
@@ -116,17 +112,42 @@
         return;
       }
       const email = emailInput.value.trim();
-      const { error } = await client.auth.signInWithOtp({
+      const password = passwordInput.value;
+      const { error } = await client.auth.signInWithPassword({
         email,
-        options: {
-          emailRedirectTo: window.location.href,
-          shouldCreateUser: true
-        }
+        password
       });
       if (error) {
         setMessage(error.message, "error");
       } else {
-        setMessage("登录邮件已发送，去邮箱点一下链接就行。", "success");
+        setMessage("登录成功。", "success");
+        closeModal();
+      }
+    });
+
+    modal.querySelector("[data-auth-action='signup']").addEventListener("click", async () => {
+      if (!client) {
+        setMessage("还没配置 Supabase，先填 supabase-config.js。", "error");
+        return;
+      }
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      if (!email || password.length < 6) {
+        setMessage("请输入邮箱和至少 6 位密码。", "error");
+        return;
+      }
+      const { data, error } = await client.auth.signUp({
+        email,
+        password,
+        options: { data: { user_name: email } }
+      });
+      if (error) {
+        setMessage(error.message, "error");
+      } else if (data.session) {
+        setMessage("注册成功，已登录。", "success");
+        closeModal();
+      } else {
+        setMessage("注册成功。如果后台还开着邮箱确认，请去 Supabase 关闭 Confirm email。", "success");
       }
     });
 
