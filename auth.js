@@ -20,6 +20,7 @@
 
   const article = document.querySelector(".article-page[data-article-id]");
   const articleId = article ? article.dataset.articleId : "";
+  const noteCards = Array.from(document.querySelectorAll(".note-card[data-article-id]"));
 
   function displayName(user) {
     if (!user) return "";
@@ -206,6 +207,116 @@
     commentForm.addEventListener("submit", submitComment);
   }
 
+  function buildCardEngagementUi() {
+    noteCards.forEach((card) => {
+      const button = card.querySelector("[data-card-like]");
+      if (!button) return;
+      button.addEventListener("click", async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        await toggleCardLike(card);
+      });
+    });
+  }
+
+  async function incrementArticleView() {
+    if (!client || !articleId) return;
+    const { data, error } = await client
+      .from("article_views")
+      .select("view_count")
+      .eq("article_id", articleId)
+      .maybeSingle();
+
+    if (error) return;
+
+    const nextCount = (data?.view_count || 0) + 1;
+    await client
+      .from("article_views")
+      .upsert({ article_id: articleId, view_count: nextCount }, { onConflict: "article_id" });
+  }
+
+  async function refreshCardStats() {
+    if (!client || noteCards.length === 0) return;
+    const ids = noteCards.map((card) => card.dataset.articleId);
+
+    const { data: likes } = await client
+      .from("article_likes")
+      .select("article_id")
+      .in("article_id", ids);
+
+    const likeCounts = new Map();
+    (likes || []).forEach((like) => {
+      likeCounts.set(like.article_id, (likeCounts.get(like.article_id) || 0) + 1);
+    });
+
+    const { data: views } = await client
+      .from("article_views")
+      .select("article_id, view_count")
+      .in("article_id", ids);
+
+    const viewCounts = new Map((views || []).map((item) => [item.article_id, item.view_count || 0]));
+
+    let likedIds = new Set();
+    if (currentUser) {
+      const { data: myLikes } = await client
+        .from("article_likes")
+        .select("article_id")
+        .eq("user_id", currentUser.id)
+        .in("article_id", ids);
+      likedIds = new Set((myLikes || []).map((item) => item.article_id));
+    }
+
+    noteCards.forEach((card) => {
+      const id = card.dataset.articleId;
+      const likeNode = card.querySelector("[data-card-likes]");
+      const viewNode = card.querySelector("[data-card-views]");
+      const likeButton = card.querySelector("[data-card-like]");
+
+      if (likeNode) likeNode.textContent = String(likeCounts.get(id) || 0);
+      if (viewNode) viewNode.textContent = String(viewCounts.get(id) || 0);
+      if (likeButton) {
+        const isLiked = likedIds.has(id);
+        likeButton.classList.toggle("liked", isLiked);
+        const iconPath = likeButton.querySelector("svg path");
+        if (iconPath) {
+          iconPath.setAttribute("fill", isLiked ? "currentColor" : "none");
+        }
+      }
+    });
+  }
+
+  async function toggleCardLike(card) {
+    if (!client) {
+      openModal();
+      setMessage("先配置 Supabase，点赞才会写入数据库。", "error");
+      return;
+    }
+    if (!currentUser) {
+      openModal();
+      setMessage("登录后才能点赞。", "info");
+      return;
+    }
+
+    const targetArticleId = card.dataset.articleId;
+    const likeButton = card.querySelector("[data-card-like]");
+    const liked = likeButton.classList.contains("liked");
+
+    if (liked) {
+      await client
+        .from("article_likes")
+        .delete()
+        .eq("article_id", targetArticleId)
+        .eq("user_id", currentUser.id);
+    } else {
+      await client
+        .from("article_likes")
+        .insert({ article_id: targetArticleId, user_id: currentUser.id });
+    }
+
+    await refreshCardStats();
+    await refreshLikeState();
+  }
+
   async function refreshLikeState() {
     if (!client || !articleId || !likeButton) return;
     const { count } = await client
@@ -333,6 +444,7 @@
   async function initAuth() {
     buildAuthUi();
     buildEngagementUi();
+    buildCardEngagementUi();
     if (!client) {
       updateAuthUi();
       await refreshComments();
@@ -342,12 +454,15 @@
     const { data } = await client.auth.getSession();
     currentUser = data.session?.user || null;
     updateAuthUi();
+    await incrementArticleView();
+    await refreshCardStats();
     await refreshLikeState();
     await refreshComments();
 
     client.auth.onAuthStateChange(async (_event, session) => {
       currentUser = session?.user || null;
       updateAuthUi();
+      await refreshCardStats();
       await refreshLikeState();
       await refreshComments();
     });
