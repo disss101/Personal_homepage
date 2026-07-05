@@ -530,8 +530,8 @@ h3 {
 
 .notes-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
   padding-bottom: 72px;
 }
 
@@ -540,14 +540,15 @@ h3 {
 }
 
 .note-card {
-  min-height: 270px;
+  min-height: 310px;
   display: flex;
   flex-direction: column;
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-  box-shadow: 0 12px 28px rgba(45, 38, 27, 0.08);
+  justify-content: space-between;
+  padding: clamp(28px, 5vw, 48px);
+  border: 1px solid #d9e1ec;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: none;
 }
 
 .note-card:hover {
@@ -569,18 +570,63 @@ h3 {
 }
 
 .note-card h2 {
-  margin-bottom: 12px;
-  font-size: 1.28rem;
-}
-
-.note-card p {
-  margin-bottom: 24px;
-}
-
-.note-card a {
-  margin-top: auto;
-  color: var(--forest);
+  max-width: 12em;
+  margin-bottom: 34px;
+  color: #061b3d;
+  font-family: Georgia, "Times New Roman", "Microsoft YaHei", serif;
+  font-size: clamp(1.75rem, 4vw, 2.55rem);
   font-weight: 900;
+  line-height: 1.18;
+}
+
+.note-title {
+  color: inherit;
+}
+
+.note-title:hover {
+  color: var(--forest);
+}
+
+.note-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
+  margin-top: auto;
+  color: #91a0b8;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+}
+
+.note-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  color: inherit;
+}
+
+.note-stat svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.card-like-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.card-like-button:hover,
+.card-like-button.liked {
+  color: var(--coral);
 }
 
 .empty-state {
@@ -804,7 +850,7 @@ h3 {
   }
 
   .notes-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .engagement-head {
@@ -822,12 +868,11 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .topic-list,
-  .notes-grid {
+  .topic-list {
     grid-template-columns: 1fr;
   }
 
   .note-card {
-    min-height: 230px;
+    min-height: 260px;
   }
 }
