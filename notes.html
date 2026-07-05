@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gigoton's Blog | 笔记集合</title>
+    <meta name="description" content="Gigoton 的笔记集合，包含技术、项目和生活记录。">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="回到个人介绍页">
+        <span class="brand-mark">G</span>
+        <span>Gigoton's Blog</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="index.html">个人介绍</a>
+        <a class="active" href="notes.html">笔记集合</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="notes-hero">
+        <div>
+          <p class="eyebrow">Notes</p>
+          <h1>笔记集合</h1>
+          <p>把最近学到、做过、想过的东西放在这里，方便回看和继续生长。</p>
+        </div>
+        <label class="search-box">
+          <span>搜索</span>
+          <input id="noteSearch" type="search" placeholder="输入关键词">
+        </label>
+      </section>
+
+      <section class="toolbar" aria-label="笔记筛选">
+        <button class="chip active" type="button" data-filter="全部">全部</button>
+        <button class="chip" type="button" data-filter="技术">技术</button>
+        <button class="chip" type="button" data-filter="项目">项目</button>
+        <button class="chip" type="button" data-filter="生活">生活</button>
+      </section>
+
+      <section class="notes-grid" id="notesGrid" aria-live="polite">
+        <article class="note-card" data-tags="技术 前端 HTML CSS JavaScript" data-title="前端学习笔记：从页面结构到交互">
+          <div class="note-meta">
+            <span>技术</span>
+            <time datetime="2026-07-05">2026.07.05</time>
+          </div>
+          <h2>前端学习笔记：从页面结构到交互</h2>
+          <p>整理 HTML、CSS、JavaScript 的学习路线，以及做页面时最容易忽略的基础习惯。</p>
+          <a href="frontend-learning-note.html">阅读全文</a>
+        </article>
+
+        <article class="note-card" data-tags="项目 复盘 个人网站" data-title="个人主页重写复盘">
+          <div class="note-meta">
+            <span>项目</span>
+            <time datetime="2026-07-05">2026.07.05</time>
+          </div>
+          <h2>个人主页重写复盘</h2>
+          <p>记录从空目录搭建 Gigoton's Blog 的过程：页面结构、内容取舍和后续计划。</p>
+          <a href="project-homepage-retrospective.html">阅读全文</a>
+        </article>
+
+        <article class="note-card" data-tags="生活 效率 注意力" data-title="给每周留一个低噪音下午">
+          <div class="note-meta">
+            <span>生活</span>
+            <time datetime="2026-07-05">2026.07.05</time>
+          </div>
+          <h2>给每周留一个低噪音下午</h2>
+          <p>一点关于休息、整理和恢复注意力的生活实验，让输入和输出都慢下来。</p>
+          <a href="life-focus-afternoon.html">阅读全文</a>
+        </article>
+      </section>
+
+      <p class="empty-state" id="emptyState" hidden>没有找到匹配的笔记。</p>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Gigoton's Blog</span>
+      <a href="index.html">回到个人介绍</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
