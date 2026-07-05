@@ -19,8 +19,8 @@
       </nav>
     </header>
 
-    <main>
-      <section class="notes-hero">
+    <main class="blog-notes-page">
+      <section class="notes-hero notes-banner">
         <div>
           <p class="eyebrow">Notes</p>
           <h1>笔记集合</h1>
@@ -32,73 +32,115 @@
         </label>
       </section>
 
-      <section class="toolbar" aria-label="笔记筛选">
-        <button class="chip active" type="button" data-filter="全部">全部</button>
-        <button class="chip" type="button" data-filter="技术">技术</button>
-        <button class="chip" type="button" data-filter="项目">项目</button>
-        <button class="chip" type="button" data-filter="生活">生活</button>
-      </section>
-
-      <section class="notes-grid" id="notesGrid" aria-live="polite">
-        <article class="note-card" data-article-id="frontend-learning-note" data-tags="技术 前端 HTML CSS JavaScript" data-title="前端学习笔记：从页面结构到交互">
-          <h2><a class="note-title" href="frontend-learning-note.html">前端学习笔记：从页面结构到交互</a></h2>
-          <div class="note-stats">
-            <span class="note-stat">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l4 2"></path></svg>
-              5 分钟
-            </span>
-            <time class="note-stat" datetime="2026-07-05">2026-07-05</time>
-            <span class="note-stat">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-              <span data-card-views>0</span>
-            </span>
-            <button class="note-stat card-like-button" type="button" data-card-like aria-label="点赞：前端学习笔记">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
-              <span data-card-likes>0</span>
-            </button>
+      <div class="blog-shell">
+        <section class="blog-feed">
+          <div class="feed-tools">
+            <section class="toolbar" aria-label="笔记筛选">
+              <button class="chip active" type="button" data-filter="全部">全部</button>
+              <button class="chip" type="button" data-filter="技术">技术</button>
+              <button class="chip" type="button" data-filter="项目">项目</button>
+              <button class="chip" type="button" data-filter="生活">生活</button>
+            </section>
           </div>
-        </article>
 
-        <article class="note-card" data-article-id="project-homepage-retrospective" data-tags="项目 复盘 个人网站" data-title="个人主页重写复盘">
-          <h2><a class="note-title" href="project-homepage-retrospective.html">个人主页重写复盘</a></h2>
-          <div class="note-stats">
-            <span class="note-stat">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l4 2"></path></svg>
-              3 分钟
-            </span>
-            <time class="note-stat" datetime="2026-07-05">2026-07-05</time>
-            <span class="note-stat">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-              <span data-card-views>0</span>
-            </span>
-            <button class="note-stat card-like-button" type="button" data-card-like aria-label="点赞：个人主页重写复盘">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
-              <span data-card-likes>0</span>
-            </button>
-          </div>
-        </article>
+          <section class="notes-grid article-stream" id="notesGrid" aria-live="polite">
+            <article class="note-card stream-card" data-article-id="frontend-learning-note" data-tags="技术 前端 HTML CSS JavaScript" data-title="前端学习笔记：从页面结构到交互">
+              <a class="stream-thumb thumb-code" href="frontend-learning-note.html" aria-label="阅读前端学习笔记"></a>
+              <div class="stream-content">
+                <span class="stream-category">技术分享</span>
+                <h2><a class="note-title" href="frontend-learning-note.html">前端学习笔记：从页面结构到交互</a></h2>
+                <p>整理 HTML、CSS、JavaScript 的学习路线，以及做页面时最容易忽略的基础习惯。</p>
+                <div class="note-stats">
+                  <span class="note-stat">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l4 2"></path></svg>
+                    5 分钟
+                  </span>
+                  <time class="note-stat" datetime="2026-07-05">2026-07-05</time>
+                  <span class="note-stat">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    <span data-card-views>0</span>
+                  </span>
+                  <button class="note-stat card-like-button" type="button" data-card-like aria-label="点赞：前端学习笔记">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
+                    <span data-card-likes>0</span>
+                  </button>
+                </div>
+              </div>
+            </article>
 
-        <article class="note-card" data-article-id="life-focus-afternoon" data-tags="生活 效率 注意力" data-title="给每周留一个低噪音下午">
-          <h2><a class="note-title" href="life-focus-afternoon.html">给每周留一个低噪音下午</a></h2>
-          <div class="note-stats">
-            <span class="note-stat">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l4 2"></path></svg>
-              4 分钟
-            </span>
-            <time class="note-stat" datetime="2026-07-05">2026-07-05</time>
-            <span class="note-stat">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-              <span data-card-views>0</span>
-            </span>
-            <button class="note-stat card-like-button" type="button" data-card-like aria-label="点赞：给每周留一个低噪音下午">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
-              <span data-card-likes>0</span>
-            </button>
-          </div>
-        </article>
-      </section>
+            <article class="note-card stream-card" data-article-id="project-homepage-retrospective" data-tags="项目 复盘 个人网站" data-title="个人主页重写复盘">
+              <a class="stream-thumb thumb-project" href="project-homepage-retrospective.html" aria-label="阅读个人主页重写复盘"></a>
+              <div class="stream-content">
+                <span class="stream-category">项目复盘</span>
+                <h2><a class="note-title" href="project-homepage-retrospective.html">个人主页重写复盘</a></h2>
+                <p>记录从空目录搭建 Gigoton's Blog 的过程：页面结构、内容取舍和后续计划。</p>
+                <div class="note-stats">
+                  <span class="note-stat">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l4 2"></path></svg>
+                    3 分钟
+                  </span>
+                  <time class="note-stat" datetime="2026-07-05">2026-07-05</time>
+                  <span class="note-stat">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    <span data-card-views>0</span>
+                  </span>
+                  <button class="note-stat card-like-button" type="button" data-card-like aria-label="点赞：个人主页重写复盘">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
+                    <span data-card-likes>0</span>
+                  </button>
+                </div>
+              </div>
+            </article>
 
-      <p class="empty-state" id="emptyState" hidden>没有找到匹配的笔记。</p>
+            <article class="note-card stream-card" data-article-id="life-focus-afternoon" data-tags="生活 效率 注意力" data-title="给每周留一个低噪音下午">
+              <a class="stream-thumb thumb-life" href="life-focus-afternoon.html" aria-label="阅读低噪音下午"></a>
+              <div class="stream-content">
+                <span class="stream-category">生活随笔</span>
+                <h2><a class="note-title" href="life-focus-afternoon.html">给每周留一个低噪音下午</a></h2>
+                <p>一点关于休息、整理和恢复注意力的生活实验，让输入和输出都慢下来。</p>
+                <div class="note-stats">
+                  <span class="note-stat">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l4 2"></path></svg>
+                    4 分钟
+                  </span>
+                  <time class="note-stat" datetime="2026-07-05">2026-07-05</time>
+                  <span class="note-stat">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    <span data-card-views>0</span>
+                  </span>
+                  <button class="note-stat card-like-button" type="button" data-card-like aria-label="点赞：给每周留一个低噪音下午">
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
+                    <span data-card-likes>0</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <p class="empty-state" id="emptyState" hidden>没有找到匹配的笔记。</p>
+        </section>
+
+        <aside class="blog-sidebar" aria-label="博客侧栏">
+          <section class="sidebar-card author-card">
+            <div class="author-cover"></div>
+            <div class="author-avatar">G</div>
+            <h2>Gigoton</h2>
+            <p>浙江大学计算机小登一枚</p>
+            <div class="author-stats">
+              <span><strong>3</strong>文章</span>
+              <span><strong>3</strong>分类</span>
+              <span><strong>1</strong>友链</span>
+            </div>
+          </section>
+
+          <section class="sidebar-card latest-card">
+            <h2>最新发布</h2>
+            <a href="frontend-learning-note.html">前端学习笔记：从页面结构到交互</a>
+            <a href="project-homepage-retrospective.html">个人主页重写复盘</a>
+            <a href="life-focus-afternoon.html">给每周留一个低噪音下午</a>
+          </section>
+        </aside>
+      </div>
     </main>
 
     <footer class="site-footer">
